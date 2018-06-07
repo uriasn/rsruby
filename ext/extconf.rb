@@ -12,6 +12,7 @@ some_paths = ENV['PATH'].split(File::PATH_SEPARATOR) + %w[
 ]
 
 some_lib_paths = some_paths.map{|dir| File.join(dir, 'lib') }
+some_lib_paths.each { |dir| $stderr.puts "Dir: #{dir}: " + Dir["#{dir}/*"].inspect }
 find_library('R', nil, *some_lib_paths)
 
 unless have_library("R")
