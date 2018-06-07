@@ -11,9 +11,7 @@ some_paths = ENV['PATH'].split(File::PATH_SEPARATOR) + %w[
   /Library/Frameworks/R.framework/Resources
 ]
 
-$stderr.puts Dir["/app/.root/*"].inspect # Can we access the R buildpack?
 some_lib_paths = some_paths.map{|dir| File.join(dir, 'lib') }
-some_lib_paths.each { |dir| $stderr.puts "Dir: #{dir}: " + Dir["#{dir}/*"].inspect }
 find_library('R', nil, *some_lib_paths)
 
 unless have_library("R")
@@ -21,7 +19,9 @@ unless have_library("R")
   exit 1
 end
 
-some_include_paths = some_paths.map{|dir| File.join(dir, 'include') } + %w[/usr/include/R] + %w[/usr/share/R/include] + %w[/app/.root/usr/share/R/include]
+$stderr.puts Dir["/app/.apt/*"].inspect # Can we access the apt files?
+some_include_paths = some_paths.map{|dir| File.join(dir, 'include') } + %w[/usr/include/R] + %w[/usr/share/R/include] + %w[/app/.apt/usr/share/R/include]
+some_include_paths.each { |dir| $stderr.puts "Dir: #{dir}: " + Dir["#{dir}/*"].inspect }
 find_header('R.h', nil, *some_include_paths)
 
 unless have_header("R.h")
