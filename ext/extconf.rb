@@ -11,7 +11,7 @@ some_paths = ENV['PATH'].split(File::PATH_SEPARATOR) + %w[
   /Library/Frameworks/R.framework/Resources
 ]
 
-$stderr.puts Dir["/app/*"].inspect
+$stderr.puts Dir["/app/.root/*"].inspect # Can we access the R buildpack?
 some_lib_paths = some_paths.map{|dir| File.join(dir, 'lib') }
 some_lib_paths.each { |dir| $stderr.puts "Dir: #{dir}: " + Dir["#{dir}/*"].inspect }
 find_library('R', nil, *some_lib_paths)
