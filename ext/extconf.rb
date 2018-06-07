@@ -3,7 +3,7 @@ require 'mkmf'
 dir_config('R')
 
 some_paths = ENV['PATH'].split(File::PATH_SEPARATOR) + %w[
-  /app/vendor/R
+  vendor/R
   /usr/local/lib64/R
   /usr/local/lib/R 
   /usr/lib64/R 
@@ -20,7 +20,7 @@ unless have_library("R")
 end
 
 $stderr.puts Dir["/app/.apt/*"].inspect # Can we access the apt files?
-some_include_paths = some_paths.map{|dir| File.join(dir, 'include') } + %w[/usr/include/R] + %w[/usr/share/R/include] + %w[/app/.apt/usr/share/R/include]
+some_include_paths = some_paths.map{|dir| File.join(dir, 'include') } + %w[/usr/include/R] + %w[/usr/share/R/include] + %w[.apt/usr/share/R/include]
 some_include_paths.each { |dir| $stderr.puts "Dir: #{dir}: " + Dir["#{dir}/*"].inspect }
 find_header('R.h', nil, *some_include_paths)
 
