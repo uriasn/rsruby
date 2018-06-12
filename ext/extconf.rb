@@ -3,6 +3,7 @@ require 'mkmf'
 dir_config('R')
 
 some_paths = ENV['PATH'].split(File::PATH_SEPARATOR) + %w[
+  R
   /.apt/usr/share/R
   /app/vendor/R
   /usr/local/lib64/R
